@@ -25,21 +25,12 @@ public class Main {
   public static void main(String[] args) {
     var i = calculateFirstValue();
     var j = calculateSecondValue(i);
-    var retries = 0;
     while (!shouldExit()) {
 
       if (validate(i, j)) {
         addToList(i, j);
         i = calculateFirstValue();
         j = calculateSecondValue(i);
-      } else {
-        final var comparison = sumFirst(i).compareTo(sumSecond(i, j));
-        if (comparison >0) {
-          i = i.add(ONE);
-        } else if(comparison <0){
-          j = j.add(ONE);
-        }
-        if(retries++ > 10) break;
       }
 
     }
@@ -62,8 +53,7 @@ public class Main {
     final var lastNumber = list.get(list.size() - 1).getKey();
     final var penultimateNumber = list.get(list.size() - 2).getKey();
     final var factor = lastNumber.divide(penultimateNumber, MathContext.DECIMAL128);
-    final var divide = lastNumber.multiply(factor).divide(ONE, 0, RoundingMode.HALF_DOWN);
-    return divide;
+    return lastNumber.multiply(factor).divide(ONE, 0, RoundingMode.HALF_DOWN);
   }
 
   private static boolean shouldExit() {

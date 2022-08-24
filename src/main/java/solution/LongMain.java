@@ -11,6 +11,7 @@ public class LongMain {
 
   private static final List<Map.Entry<Long, Long>> list = new ArrayList<>();
   private static final BigDecimal TWO = BigDecimal.valueOf(2);
+  public static final double MAGIC_FACTOR = 5.8284271247;
 
 
   public static void main(String[] args) {
@@ -18,17 +19,13 @@ public class LongMain {
     var i = 35L;
     var j = calculateSecondValue(i);
     while (!shouldExit()) {
-
       if (validate(i, j)) {
         addToList(i, j);
-        System.out.printf("%d - %d\n", i, j);
-        i = (long) (i * 5.8);
+        i = (long) (i * MAGIC_FACTOR);
       }
       i++;
       j = calculateSecondValue(i);
-
     }
-
     print();
   }
 
@@ -37,7 +34,7 @@ public class LongMain {
   }
 
   private static boolean shouldExit() {
-    return list.size() >= 15;
+    return list.size() >= 21;
   }
 
   private static long calculateSecondValue(long firstValue) {

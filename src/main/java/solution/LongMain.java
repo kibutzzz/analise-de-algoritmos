@@ -1,40 +1,29 @@
 package solution;
 
-
 import java.math.BigDecimal;
-import java.util.AbstractMap.SimpleEntry;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+
+import static java.math.BigDecimal.ONE;
+import static java.math.RoundingMode.UNNECESSARY;
 
 public class LongMain {
 
-  private static final List<Map.Entry<Long, Long>> list = new ArrayList<>();
   private static final BigDecimal TWO = BigDecimal.valueOf(2);
   public static final double MAGIC_FACTOR = 5.8284271247;
 
-
   public static void main(String[] args) {
-    list.add(new SimpleEntry<>(6L,8L));
+    System.out.println("(6, 8)");
+    var count = 1;
     var i = 35L;
     var j = calculateSecondValue(i);
-    while (!shouldExit()) {
+    while (count < 21) {
       if (validate(i, j)) {
-        addToList(i, j);
+        System.out.println("(" + i + ", " + j + ")");
+        count++;
         i = (long) (i * MAGIC_FACTOR);
       }
       i++;
       j = calculateSecondValue(i);
     }
-    print();
-  }
-
-  private static void addToList(Long i, Long j) {
-    list.add(new SimpleEntry<>(i, j));
-  }
-
-  private static boolean shouldExit() {
-    return list.size() >= 21;
   }
 
   private static long calculateSecondValue(long firstValue) {
@@ -54,23 +43,11 @@ public class LongMain {
   }
 
   private static BigDecimal sumFirstDecimal(BigDecimal first) {
-    return sum(first.subtract(BigDecimal.ONE));
+    return sum(first.subtract(ONE));
   }
 
   private static BigDecimal sum(BigDecimal n) {
-    if (n.compareTo(BigDecimal.ZERO) < 0) return BigDecimal.ZERO;
-    return n.multiply(n.add(BigDecimal.ONE)).divide(TWO);
-  }
-
-
-  private static void print() {
-    for (int i = 0; i < list.size(); i++) {
-      final var item = list.get(i);
-      System.out.println((i + 1) + "(" + item.getKey() + ", " + item.getValue() + ") ");
-    }
+    return n.multiply(n.add(ONE)).divide(TWO, UNNECESSARY);
   }
 
 }
-
-
-

@@ -15,7 +15,7 @@ public class LongMain {
     var count = 1;
     var i = 35L;
     var j = calculateSecondValue(i);
-    while (count < 21) {
+    while (count < 15) {
       if (validate(i, j)) {
         System.out.println("(" + i + ", " + j + ")");
         count++;
